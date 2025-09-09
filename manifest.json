@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "PDP AI: LLM-generated for Merchandisers",
+  "version": "1.1",
+  "description": "Run diagnostics on your PDPs with LLM-generated content.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>", "https://generativelanguage.googleapis.com/"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["dom-updater.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://generativelanguage.googleapis.com/;"
+  }
+}
